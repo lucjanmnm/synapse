@@ -1,36 +1,377 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Synapse
 
-## Getting Started
+> Personal second-brain system for life management, productivity, health, growth and long-term progress.
 
-First, run the development server:
+Synapse is not another AI chatbot or classic task manager.
+
+It’s a:
+- 🧠 second brain
+- ⚡ personal operating system
+- 📊 life dashboard
+- 🤖 AI prompt generator
+- 📅 planning system
+- 📈 progress tracker
+- 🛠️ self-management tool
+
+Built to reduce chaos, improve clarity and create sustainable progress without burnout.
+
+---
+
+# ✨ Philosophy
+
+Synapse focuses on:
+- low friction workflow
+- fast daily usage
+- realistic execution
+- clarity over motivation
+- structure over chaos
+- sustainability over intensity
+
+This project is intentionally:
+- minimalist
+- modular
+- personal
+- practical
+- and highly customizable
+
+The goal is NOT to build:
+- ❌ autonomous AI agents
+- ❌ overengineered systems
+- ❌ another bloated productivity app
+
+The goal IS to build:
+- ✅ a real daily tool
+- ✅ a life dashboard
+- ✅ a contextual AI workflow
+- ✅ a personal operating system
+
+---
+
+# 🚀 Features
+
+## 🏠 Dashboard
+
+Main dashboard includes:
+- weekly overview
+- daily overview
+- quick stats
+- recent logs
+- sleep tracking
+- mood/stress tracking
+- training summary
+- goals
+- calendar section
+- AI prompt generator
+
+Inspired by:
+- Linear
+- Notion
+- Raycast
+- Arc Browser
+
+---
+
+## ⚡ Quick Add System
+
+Fast data logging with minimal friction.
+
+Examples:
+```txt
+waga 72.1
+sen 7h
+mega produktywny dzień
+kolano boli po treningu
+pierwsze pieniądze z zamówienia
+```
+
+Track:
+- ⚖️ weight
+- 😴 sleep
+- 🏋️ workouts
+- 📈 productivity
+- 😵 stress
+- 🙂 mood
+- ❤️ relationship
+- 📝 notes
+- 💡 ideas
+- 📆 daily reviews
+
+---
+
+## 🤖 AI Prompt Generator
+
+Core feature of the project.
+
+Instead of replacing Claude AI, Synapse generates:
+- contextual prompts
+- summaries
+- reviews
+- planning prompts
+- recovery prompts
+- gym prompts
+- business prompts
+
+Based on:
+- recent logs
+- stress level
+- sleep
+- productivity
+- goals
+- priorities
+- weekly context
+
+Example:
+```txt
+Current state:
+- sleep: 7h
+- energy: low
+- stress: high
+- knee pain after workout
+- earned first money 
+- unfinished school tasks
+
+Generate a realistic daily plan focused on recovery,
+clarity and execution without overload.
+```
+
+---
+
+## 📊 Weekly Review System
+
+Track:
+- energy
+- stress
+- productivity
+- health
+- relationship quality
+- consistency
+- biggest wins
+- biggest mistakes
+- chaos sources
+- priorities
+
+Designed for:
+- reflection
+- pattern detection
+- optimization
+- and long-term awareness
+
+---
+
+## 📈 Data Visualization
+
+Minimal and clean charts:
+- weight
+- sleep
+- stress
+- productivity
+- training
+- consistency
+
+No bloated analytics.
+Only useful information.
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- ⚛️ Next.js
+- 📘 TypeScript
+- 🎨 Tailwind CSS
+- 🧩 shadcn/ui
+
+## Backend
+- 🟢 Supabase
+
+## AI Providers
+Compatible with:
+- Claude API
+- OpenAI API
+- Gemini API
+- OpenRouter
+- Groq
+
+---
+
+# 📦 Installation
+
+## 1️⃣ Clone repository
+
+```bash
+git clone https://github.com/lucjanmnm/synapse.git
+cd synapse
+```
+
+---
+
+## 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 3️⃣ Create environment file
+
+Create:
+
+```txt
+.env.local
+```
+
+Add:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+GEMINI_API_KEY=
+```
+
+Use only providers you actually need.
+
+---
+
+# 🟢 Supabase Setup
+
+## Create project
+
+Go to:
+👉 https://supabase.com
+
+Create a new project.
+
+---
+
+## Enable Authentication
+
+Recommended:
+- Email auth
+
+Optional:
+- Google auth
+- GitHub auth
+
+---
+
+## Suggested Database Tables
+
+```txt
+users
+logs
+workouts
+sleep
+mood
+reviews
+prompts
+goals
+notes
+```
+
+---
+
+# ▶️ Running Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
+👉 http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 📁 Recommended Structure
 
-## Learn More
+```txt
+/app
+/components
+/lib
+/hooks
+/services
+/utils
+/types
+/styles
+/supabase
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 🚫 Recommended .gitignore
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```gitignore
+node_modules
+.next
+.env
+.env.local
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 🧠 Personal Configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Synapse is designed mainly for personal use.
+
+You are expected to:
+- customize prompts
+- adjust workflows
+- modify tracking systems
+- adapt the dashboard to your life
+- build your own second-brain workflow
+
+The project should evolve around:
+- your habits
+- your goals
+- your routines
+- your mental patterns
+- and your real daily usage
+
+---
+
+# 🔮 Future Ideas
+
+Possible future additions:
+- 🍎 Apple Health integration
+- ⌚ Garmin sync
+- 📅 Google Calendar sync
+- 📱 mobile app
+- 🎙️ voice input
+- 🧠 AI summaries
+- 📊 advanced pattern detection
+- 🔥 deep work mode
+- 🎯 habit systems
+- 💤 recovery analysis
+- 📈 long-term analytics
+
+---
+
+# ⚠️ Important
+
+Do NOT overengineer this project.
+
+The value of Synapse comes from:
+- simplicity
+- consistency
+- low friction
+- and real usage
+
+Not from trying to build:
+- autonomous AI
+- complex agent systems
+- or a giant SaaS platform
+
+Build slowly.
+Optimize what you actually use.
+Remove unnecessary complexity.
+
+---
+
+# 📄 License
+
+> MIT License
+
+Feel free to modify and adapt the project for personal use.
