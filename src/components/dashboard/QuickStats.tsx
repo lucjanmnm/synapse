@@ -22,10 +22,10 @@ export async function QuickStats() {
   const lastWeight = logs?.filter(l => l.category === "weight").at(-1)?.value_num
 
   const stats = [
-    { label: "Waga",         value: lastWeight ? `${lastWeight} kg` : "—", sub: "ostatni wpis"    },
-    { label: "Sen (śr. 7d)", value: sleeps?.length   ? `${avg(sleeps)}h`    : "—", sub: "ostatni tydzień" },
-    { label: "Stres (śr. 7d)",value: stresses?.length ? `${avg(stresses)}/10` : "—", sub: "im niżej tym lepiej" },
-    { label: "Nastrój (śr. 7d)",value: moods?.length  ? `${avg(moods)}/10`   : "—", sub: "śr. 7 dni"      },
+    { label: "Waga",         value: lastWeight ? `${lastWeight} kg` : "-", sub: "ostatni wpis"    },
+    { label: "Sen (śr. 7d)", value: sleeps?.length   ? `${avg(sleeps)}h`    : "-", sub: "ostatni tydzień" },
+    { label: "Stres (śr. 7d)",value: stresses?.length ? `${avg(stresses)}/10` : "-", sub: "im niżej tym lepiej" },
+    { label: "Nastrój (śr. 7d)",value: moods?.length  ? `${avg(moods)}/10`   : "-", sub: "śr. 7 dni"      },
   ]
 
   return (

@@ -9,11 +9,11 @@ export async function POST(req: NextRequest) {
   const since = new Date()
   since.setDate(since.getDate() - 7)
 
-  const { data: logs } = await supabase
-    .from("logs")
-    .select("*")
-    .gte("logged_at", since.toISOString())
+  const [{ data: logs }, { data: settings }] = await Promise.all([
+    supabase.from("logs").select("*").gte("logged_at", since.toISOString()),
+    supabase.from("settings").select("context_bio").single(),
+  ])
 
-  const prompt = buildPrompt(type, logs ?? [])
+  const prompt = buildPrompt(type, logs ?? [], settings?.context_bio)
   return NextResponse.json({ prompt })
 }

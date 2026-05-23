@@ -180,7 +180,7 @@ export function CalendarView({ logs, events }: Props) {
           <h2 className="text-sm font-medium min-w-36 text-center">
             {view === "month"
               ? `${MONTHS[current.getMonth()]} ${current.getFullYear()}`
-              : `${getWeekDays(current)[0].getDate()} — ${getWeekDays(current)[6].getDate()} ${MONTHS[current.getMonth()]}`
+              : `${getWeekDays(current)[0].getDate()} - ${getWeekDays(current)[6].getDate()} ${MONTHS[current.getMonth()]}`
             }
           </h2>
           <button onClick={next} className="p-1.5 hover:bg-muted rounded-lg transition-colors">

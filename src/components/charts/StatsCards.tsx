@@ -4,7 +4,7 @@ interface Props {
 
 export function StatsCards({ logs }: Props) {
   const avg = (arr: number[]) =>
-    arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(1) : "—"
+    arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(1) : "-"
 
   const sleeps   = logs.filter(l => l.category === "sleep").map(l => l.value_num).filter(Boolean)
   const stresses = logs.filter(l => l.category === "stress").map(l => l.stress_score).filter(Boolean)
@@ -13,12 +13,12 @@ export function StatsCards({ logs }: Props) {
   const trainings = logs.filter(l => l.category === "training")
 
   const stats = [
-    { label: "Śr. sen",       value: sleeps.length   ? `${avg(sleeps)}h`      : "—", sub: `${sleeps.length} wpisów`   },
-    { label: "Śr. stres",     value: stresses.length ? `${avg(stresses)}/10`  : "—", sub: `${stresses.length} wpisów` },
-    { label: "Śr. nastrój",   value: moods.length    ? `${avg(moods)}/10`     : "—", sub: `${moods.length} wpisów`    },
+    { label: "Śr. sen",       value: sleeps.length   ? `${avg(sleeps)}h`      : "-", sub: `${sleeps.length} wpisów`   },
+    { label: "Śr. stres",     value: stresses.length ? `${avg(stresses)}/10`  : "-", sub: `${stresses.length} wpisów` },
+    { label: "Śr. nastrój",   value: moods.length    ? `${avg(moods)}/10`     : "-", sub: `${moods.length} wpisów`    },
     { label: "Treningi",      value: `${trainings.length}x`,                          sub: "ostatnie 30 dni"           },
-    { label: "Min. waga",     value: weights.length  ? `${Math.min(...weights)} kg` : "—", sub: "30 dni"              },
-    { label: "Maks. waga",    value: weights.length  ? `${Math.max(...weights)} kg` : "—", sub: "30 dni"              },
+    { label: "Min. waga",     value: weights.length  ? `${Math.min(...weights)} kg` : "-", sub: "30 dni"              },
+    { label: "Maks. waga",    value: weights.length  ? `${Math.max(...weights)} kg` : "-", sub: "30 dni"              },
   ]
 
   return (

@@ -1,18 +1,19 @@
 type PromptType = "operator" | "gym" | "business" | "reset" | "relationship"
 
-export function buildPrompt(type: PromptType, logs: any[]): string {
-  const context = buildContext(logs)
+export function buildPrompt(type: PromptType, logs: any[], context?: string): string {
+  const dataContext = buildContext(logs)
+  const userContext = context ? `\nKim jestem:\n${context}\n` : ""
 
   const templates: Record<PromptType, string> = {
-    operator: `Jesteś moim strategicznym doradcą. Oto mój kontekst z ostatnich 7 dni:\n\n${context}\n\nNa podstawie tych danych pomóż mi zaplanować realistyczny tydzień. Zaproponuj 3 główne priorytety i konkretny plan działania.`,
+    operator: `Jesteś moim strategicznym doradcą.${userContext}\nMoje dane z ostatnich 7 dni:\n${dataContext}\n\nNa podstawie tych danych pomóż mi zaplanować realistyczny tydzień. Zaproponuj 3 główne priorytety i konkretny plan działania.`,
 
-    gym: `Jesteś moim trenerem. Oto mój kontekst:\n\n${context}\n\nOceń mój stan fizyczny i zasugeruj plan treningowy na ten tydzień. Wskaż co wymaga uwagi.`,
+    gym: `Jesteś moim trenerem.${userContext}\nMoje dane:\n${dataContext}\n\nOceń mój stan fizyczny i zasugeruj plan treningowy na ten tydzień. Wskaż co wymaga uwagi.`,
 
-    business: `Jesteś moim doradcą biznesowym. Oto mój kontekst:\n\n${context}\n\nNa podstawie poziomu energii i czasu: jakie działania biznesowe powinienem priorytetyzować w tym tygodniu?`,
+    business: `Jesteś moim doradcą biznesowym.${userContext}\nMoje dane:\n${dataContext}\n\nNa podstawie poziomu energii i czasu: jakie działania biznesowe powinienem priorytetyzować w tym tygodniu?`,
 
-    reset: `Mój system jest przeciążony. Oto dane:\n\n${context}\n\nPomóż mi: 1) zrozumieć źródło przeciążenia, 2) ustalić absolutne minimum na najbliższe dni, 3) odzyskać stabilność.`,
+    reset: `Mój system jest przeciążony.${userContext}\nMoje dane:\n${dataContext}\n\nPomóż mi: 1) zrozumieć źródło przeciążenia, 2) ustalić absolutne minimum na najbliższe dni, 3) odzyskać stabilność.`,
 
-    relationship: `Oto mój kontekst osobisty:\n\n${context}\n\nPomóż mi przemyśleć balans między relacją a pozostałymi priorytetami. Co wymaga uwagi?`,
+    relationship: `Oto mój kontekst osobisty.${userContext}\nMoje dane:\n${dataContext}\n\nPomóż mi przemyśleć balans między relacją a pozostałymi priorytetami. Co wymaga uwagi?`,
   }
 
   return templates[type] ?? ""

@@ -8,7 +8,7 @@ interface Props {
 export function WeightChart({ data }: Props) {
   return (
     <div className="bg-muted rounded-xl p-4">
-      <p className="text-sm font-medium mb-1">Waga — 30 dni</p>
+      <p className="text-sm font-medium mb-1">Waga - 30 dni</p>
       <p className="text-xs text-muted-foreground mb-4">trend ciała</p>
       <ResponsiveContainer width="100%" height={160}>
         <LineChart data={data}>

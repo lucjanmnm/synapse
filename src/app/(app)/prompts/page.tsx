@@ -14,7 +14,7 @@ export default function PromptsPage() {
       <div>
         <h1 className="text-xl font-medium">AI Prompts</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Gotowe prompty do Claude — wygenerowane na podstawie twoich danych z ostatnich 7 dni.
+          Gotowe prompty do Claude - wygenerowane na podstawie twoich danych z ostatnich 7 dni.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
