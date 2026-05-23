@@ -1,5 +1,5 @@
 import { Sidebar } from "@/components/layout/Sidebar"
-import { MobileNav } from "@/components/layout/MobileNav"
+import { MobileDrawer } from "@/components/layout/MobileDrawer"
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,12 +9,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <Sidebar />
         </div>
       </aside>
-      <main className="flex-1 min-w-0 px-4 py-6 md:px-8 md:py-8 pb-24 md:pb-8">
+      <main className="flex-1 min-w-0 px-4 py-6 md:px-8 md:py-8 pt-16 md:pt-8">
         <div className="max-w-5xl mx-auto">
           {children}
         </div>
       </main>
-      <MobileNav />
+      <MobileDrawer />
     </div>
   )
 }

@@ -2,6 +2,8 @@ import { QuickStats } from "@/components/dashboard/QuickStats"
 import { LatestLogs } from "@/components/dashboard/LatestLogs"
 import { WeightChartWrapper } from "@/components/dashboard/WeightChartWrapper"
 import { PromptWidget } from "@/components/dashboard/PromptWidget"
+import { TrainingCard } from "@/components/dashboard/TrainingCard"
+import { SleepCard } from "@/components/dashboard/SleepCard"
 import { QuickAddModal } from "@/components/quick-add/QuickAddModal"
 
 function getDate() {
@@ -24,12 +26,18 @@ export default function DashboardPage() {
 
       <QuickStats />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <WeightChartWrapper />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="md:col-span-2">
+          <WeightChartWrapper />
+        </div>
         <PromptWidget />
       </div>
 
-      <LatestLogs />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <TrainingCard />
+        <SleepCard />
+        <LatestLogs />
+      </div>
     </div>
   )
 }
