@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server"
+import { formatSleep } from "@/utils/helpers"
 
 export async function SleepCard() {
   const supabase = await createClient()
@@ -26,7 +27,7 @@ export async function SleepCard() {
       <div className="space-y-2">
         {avg ? (
           <>
-            <p className="text-2xl font-medium">{avg}h</p>
+            <p className="text-2xl font-medium">{formatSleep(parseFloat(avg))}</p>
             <div className="flex gap-1">
               {logs?.slice(0, 7).reverse().map((log, i) => (
                 <div

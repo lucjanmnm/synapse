@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server"
+import { formatSleep } from "@/utils/helpers"
 
 export async function QuickStats() {
   const supabase = await createClient()
@@ -11,8 +12,8 @@ export async function QuickStats() {
     .select("*")
     .gte("logged_at", since.toISOString())
 
-  const avg = (arr: number[]) =>
-    arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(1) : null
+  const avg = (arr: number[]): number | null =>
+    arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null
 
   const weights  = logs?.filter(l => l.category === "weight").map(l => l.value_num).filter(Boolean)
   const sleeps   = logs?.filter(l => l.category === "sleep").map(l => l.value_num).filter(Boolean)
@@ -21,11 +22,15 @@ export async function QuickStats() {
 
   const lastWeight = logs?.filter(l => l.category === "weight").at(-1)?.value_num
 
+  const sleepAvg = sleeps ? avg(sleeps) : null
+  const stressAvg = stresses ? avg(stresses) : null
+  const moodAvg = moods ? avg(moods) : null
+
   const stats = [
     { label: "Waga",         value: lastWeight ? `${lastWeight} kg` : "-", sub: "ostatni wpis"    },
-    { label: "Sen (śr. 7d)", value: sleeps?.length   ? `${avg(sleeps)}h`    : "-", sub: "ostatni tydzień" },
-    { label: "Stres (śr. 7d)",value: stresses?.length ? `${avg(stresses)}/10` : "-", sub: "im niżej tym lepiej" },
-    { label: "Nastrój (śr. 7d)",value: moods?.length  ? `${avg(moods)}/10`   : "-", sub: "śr. 7 dni"      },
+    { label: "Sen (śr. 7d)", value: sleepAvg !== null ? formatSleep(sleepAvg) : "-", sub: "ostatni tydzień" },
+    { label: "Stres (śr. 7d)",value: stressAvg !== null ? `${stressAvg.toFixed(1)}/10` : "-", sub: "im niżej tym lepiej" },
+    { label: "Nastrój (śr. 7d)",value: moodAvg !== null  ? `${moodAvg.toFixed(1)}/10`   : "-", sub: "śr. 7 dni"      },
   ]
 
   return (

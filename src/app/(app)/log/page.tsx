@@ -1,4 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
+import { DeleteLogButton } from "@/components/log/DeleteLogButton"
+import { EditLogModal } from "@/components/log/EditLogModal"
 
 const CATEGORIES = [
   { value: "all",          label: "Wszystkie" },
@@ -82,9 +84,13 @@ export default async function LogPage({
                 </span>
                 <span className="text-sm truncate">{log.raw_input}</span>
               </div>
-              <span className="text-xs text-muted-foreground shrink-0 ml-4">
-                {formatDate(log.logged_at)}
-              </span>
+                <div className="flex items-center gap-2 shrink-0 ml-4">
+                  <span className="text-xs text-muted-foreground">
+                    {formatDate(log.logged_at)}
+                  </span>
+                    <EditLogModal id={log.id} rawInput={log.raw_input} />
+                    <DeleteLogButton id={log.id} />
+              </div>
             </div>
           ))
         ) : (
