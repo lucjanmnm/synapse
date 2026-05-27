@@ -20,14 +20,20 @@ export function PromptWidget() {
     setActive(type)
     setLoading(true)
     setPrompt("")
-    const res = await fetch("/api/prompts/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type }),
-    })
-    const data = await res.json()
-    setPrompt(data.prompt)
-    setLoading(false)
+    try {
+      const res = await fetch("/api/prompts/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type }),
+      })
+      if (!res.ok) throw new Error("Błąd generowania")
+      const data = await res.json()
+      setPrompt(data.prompt)
+    } catch {
+      setPrompt("Błąd — spróbuj ponownie.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   async function copy() {

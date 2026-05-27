@@ -1,13 +1,31 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/utils/supabase/server"
+import { z } from "zod"
+
+const LogSchema = z.object({
+  category: z.enum(["weight", "sleep", "training", "stress", "mood", "note", "relationship", "idea", "review"]),
+  value_num: z.number().optional(),
+  value_text: z.string().optional(),
+  mood_score: z.number().min(1).max(10).optional(),
+  stress_score: z.number().min(1).max(10).optional(),
+  energy_score: z.number().min(1).max(10).optional(),
+  raw_input: z.string().min(1).max(500),
+  tags: z.array(z.string()).optional(),
+})
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient()
+
   const body = await req.json()
+  const parsed = LogSchema.safeParse(body)
+
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 })
+  }
 
   const { data, error } = await supabase
     .from("logs")
-    .insert(body)
+    .insert(parsed.data)
     .select()
     .single()
 
@@ -37,6 +55,8 @@ export async function DELETE(req: NextRequest) {
   const supabase = await createClient()
   const { id } = await req.json()
 
+  if (!id) return NextResponse.json({ error: "Brak id" }, { status: 400 })
+
   const { error } = await supabase
     .from("logs")
     .delete()
@@ -50,9 +70,16 @@ export async function PATCH(req: NextRequest) {
   const supabase = await createClient()
   const { id, ...body } = await req.json()
 
+  if (!id) return NextResponse.json({ error: "Brak id" }, { status: 400 })
+
+  const parsed = LogSchema.partial().safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 })
+  }
+
   const { data, error } = await supabase
     .from("logs")
-    .update(body)
+    .update(parsed.data)
     .eq("id", id)
     .select()
     .single()

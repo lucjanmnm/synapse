@@ -12,6 +12,10 @@ export interface ParsedLog {
   raw_input: string
 }
 
+function clamp(val: number, min: number, max: number): number {
+  return Math.min(Math.max(val, min), max)
+}
+
 function stripPrefix(input: string, ...prefixes: string[]): string {
   const lower = input.toLowerCase()
   for (const prefix of prefixes) {
@@ -49,21 +53,21 @@ export function parseQuickAdd(input: string): ParsedLog {
   if (lower.startsWith("stres")) {
     const val = stripPrefix(raw, "stres")
     const num = parseInt(val)
-    if (!isNaN(num)) return { category: "stress", stress_score: num, raw_input: raw }
+    if (!isNaN(num)) return { category: "stress", stress_score: clamp(num, 1, 10), raw_input: raw }
   }
 
   // Mood: "mood 7" | "mood: 7" | "nastrój 7"
   if (lower.startsWith("mood") || lower.startsWith("nastrój")) {
     const val = stripPrefix(raw, "mood", "nastrój")
     const num = parseInt(val)
-    if (!isNaN(num)) return { category: "mood", mood_score: num, raw_input: raw }
+    if (!isNaN(num)) return { category: "mood", mood_score: clamp(num, 1, 10), raw_input: raw }
   }
 
   // Energia: "energia 6" | "energia: 6"
   if (lower.startsWith("energia")) {
     const val = stripPrefix(raw, "energia")
     const num = parseInt(val)
-    if (!isNaN(num)) return { category: "note", energy_score: num, raw_input: raw }
+    if (!isNaN(num)) return { category: "note", energy_score: clamp(num, 1, 10), raw_input: raw }
   }
 
   // Trening: "trening nogi" | "trening: push"

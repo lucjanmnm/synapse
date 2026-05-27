@@ -4,7 +4,7 @@
 
 Synapse is not another AI chatbot or classic task manager.
 
-It’s a:
+It's a:
 - 🧠 second brain
 - ⚡ personal operating system
 - 📊 life dashboard
@@ -120,20 +120,6 @@ Based on:
 - priorities
 - weekly context
 
-Example:
-```txt
-Current state:
-- sleep: 7h
-- energy: low
-- stress: high
-- knee pain after workout
-- earned first money 
-- unfinished school tasks
-
-Generate a realistic daily plan focused on recovery,
-clarity and execution without overload.
-```
-
 ---
 
 ## 📊 Weekly Review System
@@ -150,12 +136,6 @@ Track:
 - chaos sources
 - priorities
 
-Designed for:
-- reflection
-- pattern detection
-- optimization
-- and long-term awareness
-
 ---
 
 ## 📈 Data Visualization
@@ -168,167 +148,25 @@ Minimal and clean charts:
 - training
 - consistency
 
-No bloated analytics.
-Only useful information.
-
 ---
 
 # 🛠️ Tech Stack
 
 ## Frontend
-- ⚛️ Next.js
+- ⚛️ Next.js 14 (App Router)
 - 📘 TypeScript
 - 🎨 Tailwind CSS
 - 🧩 shadcn/ui
+- 📊 Recharts
 
 ## Backend
-- 🟢 Supabase
-
-## AI Providers
-Compatible with:
-- Claude API
-- OpenAI API
-- Gemini API
-- OpenRouter
-- Groq
+- 🟢 Supabase (PostgreSQL)
 
 ---
 
 # 📦 Installation
 
-## 1️⃣ Clone repository
-
-```bash
-git clone https://github.com/lucjanmnm/synapse.git
-cd synapse
-```
-
----
-
-## 2️⃣ Install dependencies
-
-```bash
-npm install
-```
-
----
-
-## 3️⃣ Create environment file
-
-Create:
-
-```txt
-.env.local
-```
-
-Add:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-
-OPENAI_API_KEY=
-ANTHROPIC_API_KEY=
-GEMINI_API_KEY=
-```
-
-Use only providers you actually need.
-
----
-
-# 🟢 Supabase Setup
-
-## Create project
-
-Go to:
-👉 https://supabase.com
-
-Create a new project.
-
----
-
-## Enable Authentication
-
-Recommended:
-- Email auth
-
-Optional:
-- Google auth
-- GitHub auth
-
----
-
-## Suggested Database Tables
-
-```txt
-users
-logs
-workouts
-sleep
-mood
-reviews
-prompts
-goals
-notes
-```
-
----
-
-# ▶️ Running Locally
-
-```bash
-npm run dev
-```
-
-Open:
-👉 http://localhost:3000
-
----
-
-# 📁 Recommended Structure
-
-```txt
-/app
-/components
-/lib
-/hooks
-/services
-/utils
-/types
-/styles
-/supabase
-```
-
----
-
-# 🚫 Recommended .gitignore
-
-```gitignore
-node_modules
-.next
-.env
-.env.local
-```
-
----
-
-# 🧠 Personal Configuration
-
-Synapse is designed mainly for personal use.
-
-You are expected to:
-- customize prompts
-- adjust workflows
-- modify tracking systems
-- adapt the dashboard to your life
-- build your own second-brain workflow
-
-The project should evolve around:
-- your habits
-- your goals
-- your routines
-- your mental patterns
-- and your real daily usage
+See [INSTALL.md](./INSTALL.md) for full setup guide.
 
 ---
 
@@ -359,19 +197,8 @@ The value of Synapse comes from:
 - low friction
 - and real usage
 
-Not from trying to build:
-- autonomous AI
-- complex agent systems
-- or a giant SaaS platform
-
-Build slowly.
-Optimize what you actually use.
-Remove unnecessary complexity.
-
 ---
 
 # 📄 License
 
-> MIT License
-
-Feel free to modify and adapt the project for personal use.
+MIT License - feel free to modify and adapt for personal use.
