@@ -1,40 +1,29 @@
-# 📦 Synapse - Installation Guide
+# 📦 Synapse — Installation Guide
 
 ---
 
-## 1. Clone repository
+## 1️⃣ Clone & install
 
 ```bash
 git clone https://github.com/lucjanmnm/synapse.git
 cd synapse
-```
-
----
-
-## 2. Install dependencies
-
-```bash
 npm install
 ```
 
 ---
 
-## 3. Create Supabase project
+## 2️⃣ Supabase setup
 
-Go to 👉 https://supabase.com and create a new project.
-
-Then go to:
-**Project Settings → API**
-
-Copy:
-- `Project URL`
-- `Publishable Key` (anon key)
+1. Go to 👉 https://supabase.com — create a new project
+2. **Project Settings → API** → copy:
+   - `Project URL`
+   - `Publishable Key`
 
 ---
 
-## 4. Create environment file
+## 3️⃣ Environment file
 
-Create `.env.local` in the root of the project:
+Create `.env.local` in project root:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
@@ -43,16 +32,13 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 
 ---
 
-## 5. Run SQL migrations
+## 4️⃣ SQL migrations
 
-Go to your Supabase project → **SQL Editor** and run the following SQL in order.
+Go to **Supabase → SQL Editor** and run each block below in order.
 
 ---
 
-### 5.1 - logs
-
-Main table for all Quick Add entries.
-
+### logs
 ```sql
 create table logs (
   id           uuid primary key default gen_random_uuid(),
@@ -69,12 +55,7 @@ create table logs (
 );
 ```
 
----
-
-### 5.2 - goals
-
-Weekly and monthly goals.
-
+### goals
 ```sql
 create table goals (
   id         uuid primary key default gen_random_uuid(),
@@ -88,12 +69,7 @@ create table goals (
 );
 ```
 
----
-
-### 5.3 - weekly_reviews
-
-One record per week.
-
+### weekly_reviews
 ```sql
 create table weekly_reviews (
   id              uuid primary key default gen_random_uuid(),
@@ -111,29 +87,40 @@ create table weekly_reviews (
 );
 ```
 
----
+### event_categories
+```sql
+create table event_categories (
+  id         uuid primary key default gen_random_uuid(),
+  name       text not null,
+  color      text not null default '#888888',
+  created_at timestamptz not null default now()
+);
 
-### 5.4 - events
+insert into event_categories (name, color) values
+  ('Szkoła',      '#6B7280'),
+  ('Transport',   '#F97316'),
+  ('Życie',       '#3B82F6'),
+  ('Życie ważne', '#EF4444'),
+  ('Trening',     '#22C55E');
+```
 
-Calendar events.
-
+### events
 ```sql
 create table events (
-  id          uuid primary key default gen_random_uuid(),
-  title       text not null,
-  date        date not null,
-  time        time,
-  description text,
-  created_at  timestamptz not null default now()
+  id            uuid primary key default gen_random_uuid(),
+  title         text not null,
+  date          date not null,
+  time_start    time,
+  time_end      time,
+  description   text,
+  category_id   uuid references event_categories(id) on delete set null,
+  recurring     boolean not null default false,
+  recurring_days int[] default null,
+  created_at    timestamptz not null default now()
 );
 ```
 
----
-
-### 5.5 - settings
-
-User settings - one row only.
-
+### settings
 ```sql
 create table settings (
   id           uuid primary key default gen_random_uuid(),
@@ -145,16 +132,10 @@ create table settings (
   updated_at   timestamptz not null default now()
 );
 
--- Required: insert one default row
 insert into settings (display_name) values ('Użytkownik');
 ```
 
----
-
-### 5.6 - priorities
-
-Weekly priorities shown on dashboard.
-
+### priorities
 ```sql
 create table priorities (
   id         uuid primary key default gen_random_uuid(),
@@ -165,9 +146,56 @@ create table priorities (
 );
 ```
 
+### budget_categories
+```sql
+create table budget_categories (
+  id         uuid primary key default gen_random_uuid(),
+  name       text not null,
+  type       text not null check (type in ('expense', 'income')),
+  color      text not null default '#888888',
+  created_at timestamptz not null default now()
+);
+
+insert into budget_categories (name, type, color) values
+  ('Jedzenie',    'expense', '#F97316'),
+  ('Transport',   'expense', '#6B7280'),
+  ('Rozrywka',    'expense', '#8B5CF6'),
+  ('Ubrania',     'expense', '#EC4899'),
+  ('Zdrowie',     'expense', '#22C55E'),
+  ('Inne',        'expense', '#94A3B8'),
+  ('Kieszonkowe', 'income',  '#4ADE80'),
+  ('Praca',       'income',  '#60A5FA'),
+  ('Inne',        'income',  '#A3E635');
+```
+
+### transactions
+```sql
+create table transactions (
+  id          uuid primary key default gen_random_uuid(),
+  type        text not null check (type in ('expense', 'income')),
+  amount      numeric not null,
+  description text,
+  category_id uuid references budget_categories(id) on delete set null,
+  date        date not null default current_date,
+  created_at  timestamptz not null default now()
+);
+```
+
+### budget_goals
+```sql
+create table budget_goals (
+  id         uuid primary key default gen_random_uuid(),
+  title      text not null,
+  target     numeric not null,
+  saved      numeric not null default 0,
+  color      text default '#60A5FA',
+  created_at timestamptz not null default now()
+);
+```
+
 ---
 
-## 6. Run locally
+## 5️⃣ Run locally
 
 ```bash
 npm run dev
@@ -177,19 +205,18 @@ Open 👉 http://localhost:3000
 
 ---
 
-## 7. Optional - allow dev access from other devices (mobile)
+## 6️⃣ Mobile access (optional)
 
 ```bash
 npm run dev -- --host
 ```
 
-Then add your local IP to `next.config.ts`:
+Add your local IP to `next.config.ts`:
 
 ```ts
 const nextConfig = {
-  allowedDevOrigins: ['your-local-ip'],
+  allowedDevOrigins: ['192.168.x.x'],
 }
-
 export default nextConfig
 ```
 
@@ -197,14 +224,13 @@ export default nextConfig
 
 ## ✅ Done
 
-Your Synapse instance is ready.
+Start logging:
 
-Open the dashboard and start logging with Quick Add:
-
-```txt
+```
 waga 72.1
 sen 7:30
 stres 6
 mood 8
-trening push
+wydatek 45 jedzenie
+przychód 500 praca
 ```

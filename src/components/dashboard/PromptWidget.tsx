@@ -30,7 +30,7 @@ export function PromptWidget() {
       const data = await res.json()
       setPrompt(data.prompt)
     } catch {
-      setPrompt("Błąd — spróbuj ponownie.")
+      setPrompt("Błąd - spróbuj ponownie.")
     } finally {
       setLoading(false)
     }

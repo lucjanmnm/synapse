@@ -5,9 +5,10 @@ export async function GET() {
   const supabase = await createClient()
 
   const { data, error } = await supabase
-    .from("events")
-    .select("*, event_categories(id, name, color)")
-    .order("date", { ascending: true })
+    .from("budget_categories")
+    .select("*")
+    .order("type", { ascending: true })
+    .order("created_at", { ascending: true })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
   return NextResponse.json(data)
@@ -15,12 +16,12 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient()
-  const body = await req.json()
+  const { name, type, color } = await req.json()
 
   const { data, error } = await supabase
-    .from("events")
-    .insert(body)
-    .select("*, event_categories(id, name, color)")
+    .from("budget_categories")
+    .insert({ name, type, color })
+    .select()
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
@@ -31,30 +32,11 @@ export async function DELETE(req: NextRequest) {
   const supabase = await createClient()
   const { id } = await req.json()
 
-  if (!id) return NextResponse.json({ error: "Brak id" }, { status: 400 })
-
   const { error } = await supabase
-    .from("events")
+    .from("budget_categories")
     .delete()
     .eq("id", id)
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
   return NextResponse.json({ success: true })
-}
-
-export async function PATCH(req: NextRequest) {
-  const supabase = await createClient()
-  const { id, ...body } = await req.json()
-
-  if (!id) return NextResponse.json({ error: "Brak id" }, { status: 400 })
-
-  const { data, error } = await supabase
-    .from("events")
-    .update(body)
-    .eq("id", id)
-    .select("*, event_categories(id, name, color)")
-    .single()
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 400 })
-  return NextResponse.json(data)
 }

@@ -6,6 +6,7 @@ import { TrainingCard } from "@/components/dashboard/TrainingCard"
 import { SleepCard } from "@/components/dashboard/SleepCard"
 import { UpcomingEvents } from "@/components/dashboard/UpcomingEvents"
 import { WeeklyPriorities } from "@/components/dashboard/WeeklyPriorities"
+import { BudgetCard } from "@/components/dashboard/BudgetCard"
 import { QuickAddModal } from "@/components/quick-add/QuickAddModal"
 
 function getDate() {
@@ -38,12 +39,13 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <TrainingCard />
         <SleepCard />
-        <UpcomingEvents />
+        <BudgetCard />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <WeeklyPriorities />
         <LatestLogs />
+        <UpcomingEvents />
       </div>
     </div>
   )

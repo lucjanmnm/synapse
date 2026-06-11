@@ -1,6 +1,7 @@
 export type LogCategory =
   | "weight" | "sleep" | "training" | "stress"
   | "mood" | "note" | "relationship" | "idea" | "review"
+  | "expense" | "income"
 
 export interface ParsedLog {
   category: LogCategory
@@ -92,6 +93,33 @@ export function parseQuickAdd(input: string): ParsedLog {
     return { category: "review", value_text: raw, raw_input: raw }
   }
 
+  // Wydatek: "wydatek 45" | "wydatek 45 jedzenie"
+  if (lower.startsWith("wydatek") || lower.startsWith("wydatki")) {
+    const val = stripPrefix(raw, "wydatek", "wydatki")
+    const parts = val.split(" ")
+    const amount = parseFloat(parts[0])
+    const description = parts.slice(1).join(" ")
+    if (!isNaN(amount)) return {
+      category: "expense" as LogCategory,
+      value_num: amount,
+      value_text: description || undefined,
+      raw_input: raw,
+    }
+  }
+
+  // Przychód: "przychód 500" | "przychód 500 praca"
+  if (lower.startsWith("przychód") || lower.startsWith("przychod")) {
+    const val = stripPrefix(raw, "przychód", "przychod")
+    const parts = val.split(" ")
+    const amount = parseFloat(parts[0])
+    const description = parts.slice(1).join(" ")
+    if (!isNaN(amount)) return {
+      category: "income" as LogCategory,
+      value_num: amount,
+      value_text: description || undefined,
+      raw_input: raw,
+    }
+  }
   // Default: notatka
   return { category: "note", value_text: raw, raw_input: raw }
 }

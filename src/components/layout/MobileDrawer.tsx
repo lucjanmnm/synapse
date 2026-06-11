@@ -2,12 +2,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, LayoutDashboard, ScrollText, LineChart, Sparkles, CalendarDays, Settings, BrainCircuit, ClipboardList } from "lucide-react"
+import { Menu, X, LayoutDashboard, ScrollText, LineChart, Sparkles, CalendarDays, Settings, BrainCircuit, ClipboardList, Wallet } from "lucide-react"
 
 const nav = [
-  { href: "/dashboard", label: "Dashboard",     icon: LayoutDashboard },
+  { href: "/dashboard", label: "Dashboard",     icon: LayoutDashboard  },
   { href: "/log",       label: "Logs",          icon: ScrollText       },
   { href: "/insights",  label: "Insights",      icon: LineChart        },
+  { href: "/budget",    label: "Budżet",        icon: Wallet           },
   { href: "/prompts",   label: "AI Prompts",    icon: Sparkles         },
   { href: "/review",    label: "Weekly Review", icon: ClipboardList    },
   { href: "/calendar",  label: "Kalendarz",     icon: CalendarDays     },

@@ -21,12 +21,28 @@ export function QuickAddForm({ onSuccess, prefill }: { onSuccess?: () => void, p
 
     try {
       const parsed = parseQuickAdd(input)
-      const res = await fetch("/api/logs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed),
-      })
-      if (!res.ok) throw new Error("Błąd zapisu")
+
+      if (parsed.category === "expense" || parsed.category === "income") {
+        const res = await fetch("/api/transactions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: parsed.category,
+            amount: parsed.value_num,
+            description: parsed.value_text || parsed.raw_input,
+            date: new Date().toISOString().split("T")[0],
+          }),
+        })
+        if (!res.ok) throw new Error("Błąd zapisu transakcji")
+      } else {
+        const res = await fetch("/api/logs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsed),
+        })
+        if (!res.ok) throw new Error("Błąd zapisu")
+      }
+
       setInput("")
       router.refresh()
       onSuccess?.()
@@ -44,7 +60,7 @@ export function QuickAddForm({ onSuccess, prefill }: { onSuccess?: () => void, p
           autoFocus
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder='np. "waga 72.1" lub "sen 7h"'
+          placeholder='np. "waga 72.1", "wydatek 45", "przychód 500"'
           className="flex-1 bg-muted rounded-lg px-4 py-2.5 text-sm outline-none"
           disabled={loading}
         />

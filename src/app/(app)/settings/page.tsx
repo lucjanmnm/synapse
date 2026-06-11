@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { SettingsForm } from "@/components/settings/SettingsForm"
+import { CalendarCategories } from "@/components/settings/CalendarCategories"
 
 export default async function SettingsPage() {
   const supabase = await createClient()
@@ -21,6 +22,7 @@ export default async function SettingsPage() {
         timezone: settings?.timezone ?? "Europe/Warsaw",
         shortcuts: settings?.shortcuts ?? ["waga 72.1", "sen 7h", "stres 7", "mood 8"],
       }} />
+      <CalendarCategories />
     </div>
   )
 }

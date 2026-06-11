@@ -1,204 +1,60 @@
 # 🧠 Synapse
 
-> Personal second-brain system for life management, productivity, health, growth and long-term progress.
+> Personal second brain & life operating system.
 
-Synapse is not another AI chatbot or classic task manager.
-
-It's a:
-- 🧠 second brain
-- ⚡ personal operating system
-- 📊 life dashboard
-- 🤖 AI prompt generator
-- 📅 planning system
-- 📈 progress tracker
-- 🛠️ self-management tool
-
-Built to reduce chaos, improve clarity and create sustainable progress without burnout.
+Synapse is a minimalist life dashboard — not an AI chatbot, not a task manager. A practical tool for daily tracking, pattern analysis and contextual AI prompts.
 
 ---
 
-# ✨ Philosophy
+## ✨ What it does
 
-Synapse focuses on:
-- low friction workflow
-- fast daily usage
-- realistic execution
-- clarity over motivation
-- structure over chaos
-- sustainability over intensity
-
-This project is intentionally:
-- minimalist
-- modular
-- personal
-- practical
-- and highly customizable
-
-The goal is NOT to build:
-- ❌ autonomous AI agents
-- ❌ overengineered systems
-- ❌ another bloated productivity app
-
-The goal IS to build:
-- ✅ a real daily tool
-- ✅ a life dashboard
-- ✅ a contextual AI workflow
-- ✅ a personal operating system
+| Feature | Description |
+|---|---|
+| ⚡ Quick Add | Fast logging — `waga 72.1`, `sen 7:30`, `stres 8`, `wydatek 45` |
+| 📊 Dashboard | Daily overview — sleep, stress, weight, training, budget |
+| 🤖 AI Prompts | Contextual prompts for Claude based on your real data |
+| 📅 Calendar | Day/week/month view with categories and recurring events |
+| 📈 Insights | Charts, consistency tracker, streak |
+| 📋 Weekly Review | Structured weekly reflection with scores and priorities |
+| 💰 Budget | Income, expenses, savings goals |
+| ⚙️ Settings | AI context, quick add shortcuts, calendar categories |
 
 ---
 
-# 🚀 Features
+## 🛠️ Tech Stack
 
-## 🏠 Dashboard
-
-Main dashboard includes:
-- weekly overview
-- daily overview
-- quick stats
-- recent logs
-- sleep tracking
-- mood/stress tracking
-- training summary
-- goals
-- calendar section
-- AI prompt generator
-
-Inspired by:
-- Linear
-- Notion
-- Raycast
-- Arc Browser
+- **Next.js 14** — App Router, Server Components
+- **TypeScript** — strict mode
+- **Tailwind CSS** + **shadcn/ui** — dark mode by default
+- **Supabase** — PostgreSQL, no auth required for personal use
+- **Recharts** — minimal charts
 
 ---
 
-## ⚡ Quick Add System
+## 📦 Installation
 
-Fast data logging with minimal friction.
-
-Examples:
-```txt
-waga 72.1
-sen 7h
-mega produktywny dzień
-kolano boli po treningu
-pierwsze pieniądze z zamówienia
-```
-
-Track:
-- ⚖️ weight
-- 😴 sleep
-- 🏋️ workouts
-- 📈 productivity
-- 😵 stress
-- 🙂 mood
-- ❤️ relationship
-- 📝 notes
-- 💡 ideas
-- 📆 daily reviews
+See **[INSTALL.md](./INSTALL.md)** for full setup guide.
 
 ---
 
-## 🤖 AI Prompt Generator
+## 🔮 Roadmap
 
-Core feature of the project.
-
-Instead of replacing Claude AI, Synapse generates:
-- contextual prompts
-- summaries
-- reviews
-- planning prompts
-- recovery prompts
-- gym prompts
-- business prompts
-
-Based on:
-- recent logs
-- stress level
-- sleep
-- productivity
-- goals
-- priorities
-- weekly context
+- Google Calendar sync
+- Apple Health / Garmin integration
+- Gamification & streak rewards
+- Voice input
+- Mobile app
 
 ---
 
-## 📊 Weekly Review System
+## ⚠️ Philosophy
 
-Track:
-- energy
-- stress
-- productivity
-- health
-- relationship quality
-- consistency
-- biggest wins
-- biggest mistakes
-- chaos sources
-- priorities
+> Build slowly. Use daily. Remove what you don't need.
+
+Synapse is built for **personal use first**. No bloat, no autonomous AI, no overengineering.
 
 ---
 
-## 📈 Data Visualization
+## 📄 License
 
-Minimal and clean charts:
-- weight
-- sleep
-- stress
-- productivity
-- training
-- consistency
-
----
-
-# 🛠️ Tech Stack
-
-## Frontend
-- ⚛️ Next.js 14 (App Router)
-- 📘 TypeScript
-- 🎨 Tailwind CSS
-- 🧩 shadcn/ui
-- 📊 Recharts
-
-## Backend
-- 🟢 Supabase (PostgreSQL)
-
----
-
-# 📦 Installation
-
-See [INSTALL.md](./INSTALL.md) for full setup guide.
-
----
-
-# 🔮 Future Ideas
-
-Possible future additions:
-- 🍎 Apple Health integration
-- ⌚ Garmin sync
-- 📅 Google Calendar sync
-- 📱 mobile app
-- 🎙️ voice input
-- 🧠 AI summaries
-- 📊 advanced pattern detection
-- 🔥 deep work mode
-- 🎯 habit systems
-- 💤 recovery analysis
-- 📈 long-term analytics
-
----
-
-# ⚠️ Important
-
-Do NOT overengineer this project.
-
-The value of Synapse comes from:
-- simplicity
-- consistency
-- low friction
-- and real usage
-
----
-
-# 📄 License
-
-MIT License - feel free to modify and adapt for personal use.
+MIT — modify freely for personal use.

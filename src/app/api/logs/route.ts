@@ -3,7 +3,11 @@ import { createClient } from "@/utils/supabase/server"
 import { z } from "zod"
 
 const LogSchema = z.object({
-  category: z.enum(["weight", "sleep", "training", "stress", "mood", "note", "relationship", "idea", "review"]),
+  category: z.enum([
+  "weight", "sleep", "training", "stress",
+  "mood", "note", "relationship", "idea", "review",
+  "expense", "income"
+  ]),
   value_num: z.number().optional(),
   value_text: z.string().optional(),
   mood_score: z.number().min(1).max(10).optional(),
